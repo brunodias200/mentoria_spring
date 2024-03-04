@@ -11,4 +11,9 @@ CREATE TABLE `permission`(
 
 ALTER TABLE `permission` ADD CONSTRAINT `ukPermission_name` UNIQUE (`name`);
 
+INSERT INTO `permission` (name, created_at, modified_at, enabled) VALUES
+    ('PERMISSION_READ', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, TRUE),
+    ('USER_READ', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, TRUE);
+
+
 SET FOREIGN_KEY_CHECKS=1;
