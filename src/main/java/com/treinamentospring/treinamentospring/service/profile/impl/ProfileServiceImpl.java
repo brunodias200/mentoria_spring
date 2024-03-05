@@ -1,8 +1,8 @@
-package com.treinamentospring.treinamentospring.service.permission.impl;
+package com.treinamentospring.treinamentospring.service.profile.impl;
 
 import com.treinamentospring.treinamentospring.model.ProfileModel;
 import com.treinamentospring.treinamentospring.repository.ProfileRepository;
-import com.treinamentospring.treinamentospring.service.permission.ProfileService;
+import com.treinamentospring.treinamentospring.service.profile.ProfileService;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

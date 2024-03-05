@@ -8,6 +8,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @AllArgsConstructor
 @Service
 public class PermissionServiceImpl implements PermissionService {
@@ -17,5 +19,15 @@ public class PermissionServiceImpl implements PermissionService {
     @Override
     public Page<PermissionModel> findByNameContainsIgnoreCase(String name, Pageable pageable) {
         return repository.findByNameContainsIgnoreCase(name, pageable);
+    }
+
+    @Override
+    public Page<PermissionModel> findAll(Pageable pageable) {
+        return repository.findAll(pageable);
+    }
+
+    @Override
+    public Optional<PermissionModel> findById(Long id) {
+        return repository.findById(id);
     }
 }

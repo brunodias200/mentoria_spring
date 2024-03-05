@@ -1,4 +1,4 @@
-package com.treinamentospring.treinamentospring.service.permission;
+package com.treinamentospring.treinamentospring.service.profile;
 
 import com.treinamentospring.treinamentospring.model.ProfileModel;
 import org.springframework.data.domain.Page;
