@@ -1,11 +1,13 @@
 package com.treinamentospring.treinamentospring.model;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
+import java.util.Set;
 
 @Entity
 @Table(name="profile")
@@ -20,4 +22,11 @@ public class ProfileModel {
     private boolean enabled;
     private String name;
 
+    @JsonIgnore
+    @ManyToMany
+    @JoinTable(inverseJoinColumns = {@JoinColumn(name = "permission_id")},
+            joinColumns = {@JoinColumn(name = "profile_id")},
+            name = "profile_permission"
+    )
+    private Set<PermissionModel> permissions;
 }
