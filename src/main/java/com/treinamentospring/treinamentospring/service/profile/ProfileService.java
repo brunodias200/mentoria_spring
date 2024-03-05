@@ -7,7 +7,7 @@ import org.springframework.data.domain.Pageable;
 import java.util.Optional;
 
 public interface ProfileService {
-     Page<ProfileModel> findByNameContainsIgnoreCase(String name, Pageable pageable);
-     Page<ProfileModel> findAll(Pageable pageable);
+     Page<ProfileResponse> findByNameContainsIgnoreCase(String name, Pageable pageable);
+     Page<ProfileResponse> findAll(Pageable pageable);
      Optional<ProfileModel> findById(Long id);
 }

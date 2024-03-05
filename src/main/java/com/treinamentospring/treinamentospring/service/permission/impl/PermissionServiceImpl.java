@@ -2,6 +2,7 @@ package com.treinamentospring.treinamentospring.service.permission.impl;
 
 import com.treinamentospring.treinamentospring.model.PermissionModel;
 import com.treinamentospring.treinamentospring.repository.PermissionRepository;
+import com.treinamentospring.treinamentospring.service.permission.PermissionResponse;
 import com.treinamentospring.treinamentospring.service.permission.PermissionService;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -17,13 +18,15 @@ public class PermissionServiceImpl implements PermissionService {
     private final PermissionRepository repository;
 
     @Override
-    public Page<PermissionModel> findByNameContainsIgnoreCase(String name, Pageable pageable) {
-        return repository.findByNameContainsIgnoreCase(name, pageable);
+    public Page<PermissionResponse> findByNameContainsIgnoreCase(String name, Pageable pageable) {
+        var permissions = repository.findByNameContainsIgnoreCase(name, pageable);
+        return permissions.map(PermissionResponse::new);
     }
 
     @Override
-    public Page<PermissionModel> findAll(Pageable pageable) {
-        return repository.findAll(pageable);
+    public Page<PermissionResponse> findAll(Pageable pageable) {
+        var permissions = repository.findAll(pageable);
+        return permissions.map(PermissionResponse::new);
     }
 
     @Override

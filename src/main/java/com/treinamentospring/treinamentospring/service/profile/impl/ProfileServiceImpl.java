@@ -2,6 +2,7 @@ package com.treinamentospring.treinamentospring.service.profile.impl;
 
 import com.treinamentospring.treinamentospring.model.ProfileModel;
 import com.treinamentospring.treinamentospring.repository.ProfileRepository;
+import com.treinamentospring.treinamentospring.service.profile.ProfileResponse;
 import com.treinamentospring.treinamentospring.service.profile.ProfileService;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -17,13 +18,15 @@ public class ProfileServiceImpl implements ProfileService {
     private final ProfileRepository repository;
 
     @Override
-    public Page<ProfileModel> findByNameContainsIgnoreCase(String name, Pageable pageable) {
-        return repository.findByNameContainsIgnoreCase(name, pageable);
+    public Page<ProfileResponse> findByNameContainsIgnoreCase(String name, Pageable pageable) {
+        var profiles = repository.findByNameContainsIgnoreCase(name, pageable);
+        return profiles.map(ProfileResponse::new);
     }
 
     @Override
-    public Page<ProfileModel> findAll(Pageable pageable) {
-        return repository.findAll(pageable);
+    public Page<ProfileResponse> findAll(Pageable pageable) {
+        var profiles = repository.findAll(pageable);
+        return profiles.map(ProfileResponse::new);
     }
 
     @Override

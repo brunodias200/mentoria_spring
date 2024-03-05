@@ -7,7 +7,7 @@ import org.springframework.data.domain.Pageable;
 import java.util.Optional;
 
 public interface PermissionService {
-     Page<PermissionModel> findByNameContainsIgnoreCase(String name, Pageable pageable);
-     Page<PermissionModel> findAll(Pageable pageable);
+     Page<PermissionResponse> findByNameContainsIgnoreCase(String name, Pageable pageable);
+     Page<PermissionResponse> findAll(Pageable pageable);
      Optional<PermissionModel> findById(Long id);
 }
