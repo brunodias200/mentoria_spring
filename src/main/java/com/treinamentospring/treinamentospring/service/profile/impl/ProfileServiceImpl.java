@@ -2,6 +2,7 @@ package com.treinamentospring.treinamentospring.service.profile.impl;
 
 import com.treinamentospring.treinamentospring.model.ProfileModel;
 import com.treinamentospring.treinamentospring.repository.ProfileRepository;
+import com.treinamentospring.treinamentospring.service.profile.request.ProfileRequest;
 import com.treinamentospring.treinamentospring.service.profile.response.ProfileResponse;
 import com.treinamentospring.treinamentospring.service.profile.response.ProfilesResponse;
 import com.treinamentospring.treinamentospring.service.profile.ProfileService;
@@ -36,6 +37,13 @@ public class ProfileServiceImpl implements ProfileService {
     @Override
     public ProfileResponse findById(Long id) {
         var profile = repository.findById(id).orElseThrow(EntityNotFoundException::new);
+        return mapper.map(profile, ProfileResponse.class);
+    }
+
+    @Override
+    public ProfileResponse save(ProfileRequest request) {
+        var profile = mapper.map(request, ProfileModel.class);
+        profile = repository.save(profile);
         return mapper.map(profile, ProfileResponse.class);
     }
 }

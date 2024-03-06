@@ -1,17 +1,16 @@
 package com.treinamentospring.treinamentospring.server;
 
 import com.treinamentospring.treinamentospring.model.ProfileModel;
+import com.treinamentospring.treinamentospring.service.profile.request.ProfileRequest;
 import com.treinamentospring.treinamentospring.service.profile.response.ProfileResponse;
 import com.treinamentospring.treinamentospring.service.profile.response.ProfilesResponse;
 import com.treinamentospring.treinamentospring.service.profile.ProfileService;
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
 
@@ -32,5 +31,10 @@ public class ProfileController {
     @GetMapping("/name/{name}")
     public ResponseEntity<Page<ProfilesResponse>> findByName(@PathVariable String name, Pageable pageable){
         return ResponseEntity.ok(service.findByNameContainsIgnoreCase(name, pageable));
+    }
+
+    @PostMapping
+    public ResponseEntity<ProfileResponse> save(@Valid @RequestBody ProfileRequest request){
+        return ResponseEntity.ok(service.save(request));
     }
 }

@@ -1,6 +1,7 @@
 package com.treinamentospring.treinamentospring.service.permission;
 
 import com.treinamentospring.treinamentospring.model.PermissionModel;
+import com.treinamentospring.treinamentospring.service.permission.request.PermissionRequest;
 import com.treinamentospring.treinamentospring.service.permission.response.PermissionResponse;
 import com.treinamentospring.treinamentospring.service.permission.response.PermissionsResponse;
 import org.springframework.data.domain.Page;
@@ -12,4 +13,5 @@ public interface PermissionService {
      Page<PermissionsResponse> findByNameContainsIgnoreCase(String name, Pageable pageable);
      Page<PermissionsResponse> findAll(Pageable pageable);
      PermissionResponse findById(Long id);
+     PermissionResponse save(PermissionRequest request);
 }

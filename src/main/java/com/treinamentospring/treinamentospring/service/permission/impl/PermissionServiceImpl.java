@@ -2,6 +2,7 @@ package com.treinamentospring.treinamentospring.service.permission.impl;
 
 import com.treinamentospring.treinamentospring.model.PermissionModel;
 import com.treinamentospring.treinamentospring.repository.PermissionRepository;
+import com.treinamentospring.treinamentospring.service.permission.request.PermissionRequest;
 import com.treinamentospring.treinamentospring.service.permission.response.PermissionResponse;
 import com.treinamentospring.treinamentospring.service.permission.response.PermissionsResponse;
 import com.treinamentospring.treinamentospring.service.permission.PermissionService;
@@ -38,4 +39,14 @@ public class PermissionServiceImpl implements PermissionService {
         var permission = repository.findById(id).orElseThrow(EntityNotFoundException::new);
         return mapper.map(permission, PermissionResponse.class);
     }
+
+    @Override
+    public PermissionResponse save(PermissionRequest request) {
+        var permission = mapper.map(request, PermissionModel.class);
+        permission = repository.save(permission);
+
+        return mapper.map(permission, PermissionResponse.class);
+    }
+
+
 }
