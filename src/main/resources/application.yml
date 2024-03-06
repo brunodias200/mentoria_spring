@@ -1,3 +1,8 @@
+server:
+  error:
+    include-stacktrace: NEVER
 spring:
   datasource:
     url: jdbc:h2:mem:mem;mode=MySQL;database_to_lower=true
+  jackson:
+    property-naming-strategy: SNAKE_CASE
