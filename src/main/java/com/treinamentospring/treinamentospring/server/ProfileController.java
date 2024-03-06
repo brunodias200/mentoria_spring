@@ -1,7 +1,8 @@
 package com.treinamentospring.treinamentospring.server;
 
 import com.treinamentospring.treinamentospring.model.ProfileModel;
-import com.treinamentospring.treinamentospring.service.profile.ProfileResponse;
+import com.treinamentospring.treinamentospring.service.profile.response.ProfileResponse;
+import com.treinamentospring.treinamentospring.service.profile.response.ProfilesResponse;
 import com.treinamentospring.treinamentospring.service.profile.ProfileService;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -21,15 +22,15 @@ public class ProfileController {
     private final ProfileService service;
 
     @GetMapping("/")
-    public  ResponseEntity<Page<ProfileResponse>> findAll(Pageable pageable){
+    public  ResponseEntity<Page<ProfilesResponse>> findAll(Pageable pageable){
         return ResponseEntity.ok(service.findAll(pageable));
     }
     @GetMapping("/{id}")
-    public ResponseEntity<Optional<ProfileModel>> findById(@PathVariable Long id){
+    public ResponseEntity<ProfileResponse> findById(@PathVariable Long id){
         return ResponseEntity.ok(service.findById(id));
     }
     @GetMapping("/name/{name}")
-    public ResponseEntity<Page<ProfileResponse>> findByName(@PathVariable String name, Pageable pageable){
+    public ResponseEntity<Page<ProfilesResponse>> findByName(@PathVariable String name, Pageable pageable){
         return ResponseEntity.ok(service.findByNameContainsIgnoreCase(name, pageable));
     }
 }

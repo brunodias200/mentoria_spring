@@ -1,7 +1,8 @@
 package com.treinamentospring.treinamentospring.server;
 
 import com.treinamentospring.treinamentospring.model.PermissionModel;
-import com.treinamentospring.treinamentospring.service.permission.PermissionResponse;
+import com.treinamentospring.treinamentospring.service.permission.response.PermissionResponse;
+import com.treinamentospring.treinamentospring.service.permission.response.PermissionsResponse;
 import com.treinamentospring.treinamentospring.service.permission.PermissionService;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -22,17 +23,17 @@ public class PermissionController {
     private final PermissionService service;
 
     @GetMapping("/")
-    public ResponseEntity<Page<PermissionResponse>> findAll(Pageable pageable){
+    public ResponseEntity<Page<PermissionsResponse>> findAll(Pageable pageable){
         return ResponseEntity.ok(service.findAll(pageable));
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Optional<PermissionModel>> findById(@PathVariable Long id){
+    public ResponseEntity<PermissionResponse> findById(@PathVariable Long id){
         return ResponseEntity.ok(service.findById(id));
     }
 
     @GetMapping("/name/{name}")
-    public ResponseEntity<Page<PermissionResponse>> findByName(@PathVariable String name, Pageable pageable){
+    public ResponseEntity<Page<PermissionsResponse>> findByName(@PathVariable String name, Pageable pageable){
         return ResponseEntity.ok(service.findByNameContainsIgnoreCase(name, pageable));
     }
 }

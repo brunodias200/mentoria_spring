@@ -2,9 +2,12 @@ package com.treinamentospring.treinamentospring.service.permission.impl;
 
 import com.treinamentospring.treinamentospring.model.PermissionModel;
 import com.treinamentospring.treinamentospring.repository.PermissionRepository;
-import com.treinamentospring.treinamentospring.service.permission.PermissionResponse;
+import com.treinamentospring.treinamentospring.service.permission.response.PermissionResponse;
+import com.treinamentospring.treinamentospring.service.permission.response.PermissionsResponse;
 import com.treinamentospring.treinamentospring.service.permission.PermissionService;
+import jakarta.persistence.EntityNotFoundException;
 import lombok.AllArgsConstructor;
+import org.modelmapper.ModelMapper;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -16,21 +19,23 @@ import java.util.Optional;
 public class PermissionServiceImpl implements PermissionService {
 
     private final PermissionRepository repository;
+    private final ModelMapper mapper;
 
     @Override
-    public Page<PermissionResponse> findByNameContainsIgnoreCase(String name, Pageable pageable) {
+    public Page<PermissionsResponse> findByNameContainsIgnoreCase(String name, Pageable pageable) {
         var permissions = repository.findByNameContainsIgnoreCase(name, pageable);
-        return permissions.map(PermissionResponse::new);
+        return permissions.map(PermissionsResponse::new);
     }
 
     @Override
-    public Page<PermissionResponse> findAll(Pageable pageable) {
+    public Page<PermissionsResponse> findAll(Pageable pageable) {
         var permissions = repository.findAll(pageable);
-        return permissions.map(PermissionResponse::new);
+        return permissions.map(PermissionsResponse::new);
     }
 
     @Override
-    public Optional<PermissionModel> findById(Long id) {
-        return repository.findById(id);
+    public PermissionResponse findById(Long id) {
+        var permission = repository.findById(id).orElseThrow(EntityNotFoundException::new);
+        return mapper.map(permission, PermissionResponse.class);
     }
 }
