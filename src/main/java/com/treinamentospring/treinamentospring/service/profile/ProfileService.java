@@ -15,4 +15,6 @@ public interface ProfileService {
      ProfileResponse findById(Long id);
 
      ProfileResponse save(ProfileRequest request);
+
+    void deleteById(Long id);
 }

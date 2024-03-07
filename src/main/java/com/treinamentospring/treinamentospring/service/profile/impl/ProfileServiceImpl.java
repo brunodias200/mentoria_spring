@@ -7,6 +7,7 @@ import com.treinamentospring.treinamentospring.service.profile.response.ProfileR
 import com.treinamentospring.treinamentospring.service.profile.response.ProfilesResponse;
 import com.treinamentospring.treinamentospring.service.profile.ProfileService;
 import jakarta.persistence.EntityNotFoundException;
+import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.data.domain.Page;
@@ -45,5 +46,11 @@ public class ProfileServiceImpl implements ProfileService {
         var profile = mapper.map(request, ProfileModel.class);
         profile = repository.save(profile);
         return mapper.map(profile, ProfileResponse.class);
+    }
+
+    @Override
+    @Transactional
+    public void deleteById(Long id) {
+        repository.deleteById(id);
     }
 }

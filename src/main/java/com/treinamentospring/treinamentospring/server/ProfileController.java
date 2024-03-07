@@ -12,6 +12,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -36,5 +37,11 @@ public class ProfileController {
     @PostMapping
     public ResponseEntity<ProfileResponse> save(@Valid @RequestBody ProfileRequest request){
         return ResponseEntity.ok(service.save(request));
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Object> deleteById(@PathVariable Long id){
+        service.deleteById(id);
+        return ResponseEntity.noContent().build();
     }
 }

@@ -23,7 +23,7 @@ public class ProfileModel {
     private String name;
 
     @JsonIgnore
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(inverseJoinColumns = {@JoinColumn(name = "permission_id")},
             joinColumns = {@JoinColumn(name = "profile_id")},
             name = "profile_permission"
